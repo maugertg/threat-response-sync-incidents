@@ -64,6 +64,7 @@ def get_incident_ids(
 
     while next_params := response.headers.get("x-next"):
         # Combine Starting Params with Next Params updating existing values with Next Params
+        # Methodology added in Python 3.9 https://www.python.org/dev/peps/pep-0584/
         params = params | dict(parse_qsl(next_params))
         response = client.private_intel.incident.search.get(
             params=params, response_type="raw"
